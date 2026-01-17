@@ -135,29 +135,34 @@
 
 	
 	/*-----------------------------------------------------*/
-  	/* Navigation Menu
+  	/* Modern Slide-In Navigation Menu
    ------------------------------------------------------ */  
    var toggleButton = $('.menu-toggle'),
+       navWrap = $('#main-nav-wrap'),
        nav = $('.main-navigation');
 
    // toggle button
    toggleButton.on('click', function(e) {
-
 		e.preventDefault();
 		toggleButton.toggleClass('is-clicked');
-		nav.slideToggle();
-
+		navWrap.toggleClass('is-visible');
 	});
 
-   // nav items
+   // nav items - close menu when clicked
   	nav.find('li a').on("click", function() {   
-
    	// update the toggle button 		
-   	toggleButton.toggleClass('is-clicked'); 
-   	// fadeout the navigation panel
-   	nav.fadeOut();   		
-   	     
+   	toggleButton.removeClass('is-clicked'); 
+   	// hide the navigation panel
+   	navWrap.removeClass('is-visible');   		
   	});
+
+   // close menu when clicking outside
+   $(document).on('click', function(e) {
+   	if (!$(e.target).closest('#main-nav-wrap, .menu-toggle').length) {
+   		toggleButton.removeClass('is-clicked');
+   		navWrap.removeClass('is-visible');
+   	}
+   });
 
 
    /*---------------------------------------------------- */
