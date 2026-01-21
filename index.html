@@ -150,7 +150,7 @@
    				</li>
    				<li>
    					<strong>Email:</strong>
-   					<span>robert.maxwell2@gmail.com</span>
+   					<span class="protected-email" data-name="robert.maxwell2" data-domain="gmail.com"></span>
    				</li>
 
    			</ul> <!-- /info-list -->
@@ -529,8 +529,8 @@
 				<i class="fa fa-envelope"></i>
 			</div>
 			<h4>Email</h4>
-			<p>robert.maxwell2@gmail.com</p>
-			<a href="mailto:robert.maxwell2@gmail.com" class="cta-button primary">Send Email</a>
+			<p class="protected-email" data-name="robert.maxwell2" data-domain="gmail.com"></p>
+			<a href="#" class="cta-button primary protected-email-link" data-name="robert.maxwell2" data-domain="gmail.com">Send Email</a>
 		</div>
 
 		<div class="contact-card">
@@ -593,6 +593,22 @@
    <script src="js/jquery-2.1.3.min.js"></script>
    <script src="js/plugins.js"></script>
    <script src="js/main.js"></script>
+
+   <!-- Email obfuscation - assembles email at runtime to prevent bot scraping -->
+   <script>
+   (function() {
+       document.querySelectorAll('.protected-email').forEach(function(el) {
+           var n = el.getAttribute('data-name');
+           var d = el.getAttribute('data-domain');
+           if (n && d) el.textContent = n + '@' + d;
+       });
+       document.querySelectorAll('.protected-email-link').forEach(function(el) {
+           var n = el.getAttribute('data-name');
+           var d = el.getAttribute('data-domain');
+           if (n && d) el.href = 'mailto:' + n + '@' + d;
+       });
+   })();
+   </script>
 
 </body>
 
